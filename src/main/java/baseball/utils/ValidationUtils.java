@@ -21,4 +21,10 @@ public class ValidationUtils {
             throw new IllegalArgumentException("유효하지 않은 입력값입니다.");
         }
     }
+
+    public static void validateRestartOrEndInput(String input) {
+        if (!input.equals("1") && !input.equals("2")) {
+            throw new IllegalArgumentException("잘못된 입력값입니다. 1이나 2를 입력하세요.");
+        }
+    }
 }

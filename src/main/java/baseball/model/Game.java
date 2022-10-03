@@ -1,5 +1,7 @@
 package baseball.model;
 
+import baseball.utils.IoUtils;
+import baseball.utils.ValidationUtils;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -55,5 +57,14 @@ public class Game {
             return stringBuilder.append(counts.getBallCount()).append("볼").toString();
         }
         return stringBuilder.append("낫싱").toString();
+    }
+
+    public String calculateRestartOrEnd() {
+        String value = IoUtils.getUserInput("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+        ValidationUtils.validateRestartOrEndInput(value);
+        if (value.equals("1")) {
+            return "1";
+        }
+        return "2";
     }
 }
