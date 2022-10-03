@@ -1,5 +1,7 @@
 package baseball;
 
+import baseball.model.Counts;
+import baseball.model.Game;
 import baseball.model.User;
 import baseball.utils.RandomUtils;
 
@@ -8,6 +10,8 @@ public class Application {
         boolean notEnd = true;
         String randomNumber = RandomUtils.generateRandomNumber();
 
-        User user = new User();
+        while (notEnd) {
+            Game game = new Game(new Counts(), new User());
+        }
     }
 }

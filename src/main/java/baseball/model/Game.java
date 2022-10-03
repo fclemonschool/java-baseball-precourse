@@ -41,4 +41,19 @@ public class Game {
             counts.setStrikeCount(counts.getStrikeCount() + 1);
         }
     }
+
+    public String makeCalculateLog(int keyCount, int strikeCount) {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (keyCount > 0 && keyCount == strikeCount) {
+            return stringBuilder.append(strikeCount).append("스트라이크").toString();
+        }
+        if (strikeCount != keyCount && strikeCount != 0) {
+            return stringBuilder.append(counts.getBallCount()).append("볼 ").append(strikeCount).append("스트라이크")
+                    .toString();
+        }
+        if (keyCount != 0 && strikeCount == 0) {
+            return stringBuilder.append(counts.getBallCount()).append("볼").toString();
+        }
+        return stringBuilder.append("낫싱").toString();
+    }
 }
