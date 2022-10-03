@@ -89,4 +89,8 @@ public class Game {
         }
         return randomNumber;
     }
+
+    public boolean checkEnd(String endOrRestart) {
+        return endOrRestart == null || !endOrRestart.equals("2");
+    }
 }
