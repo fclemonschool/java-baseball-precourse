@@ -13,7 +13,7 @@ public class Application {
         while (notEnd) {
             Game game = new Game(new Counts(), new User());
             game.calculateCounts(randomNumber);
-            String endOrRestart = game.calculateResult();
+            randomNumber = game.checkRestart(randomNumber, game.calculateResult());
         }
     }
 }

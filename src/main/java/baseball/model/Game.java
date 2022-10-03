@@ -1,6 +1,7 @@
 package baseball.model;
 
 import baseball.utils.IoUtils;
+import baseball.utils.RandomUtils;
 import baseball.utils.ValidationUtils;
 import java.util.HashMap;
 import java.util.Map;
@@ -80,5 +81,12 @@ public class Game {
             return "1";
         }
         return "2";
+    }
+
+    public String checkRestart(String randomNumber, String endOrRestart) {
+        if (endOrRestart != null && endOrRestart.equals("1")) {
+            randomNumber = RandomUtils.generateRandomNumber();
+        }
+        return randomNumber;
     }
 }
