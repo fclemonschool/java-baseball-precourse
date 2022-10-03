@@ -21,7 +21,6 @@ public class Game {
     public void calculateCounts(String target) {
         Map<Character, Integer> inputMap = new HashMap<>();
         Map<Character, Integer> randomNumberMap = new HashMap<>();
-
         for (int i = 0; i < user.getUserInput().length(); i++) {
             inputMap.put(user.getUserInput().charAt(i), i);
             randomNumberMap.put(target.charAt(i), i);
@@ -32,13 +31,13 @@ public class Game {
         });
     }
 
-    public void calculateKeyCount(Map<Character, Integer> randomNumberMap, Character key) {
+    private void calculateKeyCount(Map<Character, Integer> randomNumberMap, Character key) {
         if (randomNumberMap.containsKey(key)) {
             counts.setKeyCount(counts.getKeyCount() + 1);
         }
     }
 
-    public void calculateStrikeCount(Map<Character, Integer> randomNumberMap, Character key, Integer value) {
+    private void calculateStrikeCount(Map<Character, Integer> randomNumberMap, Character key, Integer value) {
         if (randomNumberMap.containsKey(key) && Objects.equals(randomNumberMap.get(key), value)) {
             counts.setStrikeCount(counts.getStrikeCount() + 1);
         }
@@ -56,25 +55,24 @@ public class Game {
         return null;
     }
 
-    public void logCalculateResult() {
-        log.info(makeCalculateLog(new StringBuilder(), counts.getKeyCount(), counts.getStrikeCount()));
+    private void logCalculateResult() {
+        log.info(makeCalculateLog(new StringBuilder(), counts.getKeyCount(), counts.getStrikeCount()).toString());
     }
 
-    public String makeCalculateLog(StringBuilder stringBuilder, int keyCount, int strikeCount) {
+    private StringBuilder makeCalculateLog(StringBuilder stringBuilder, int keyCount, int strikeCount) {
         if (keyCount > 0 && keyCount == strikeCount) {
-            return stringBuilder.append(strikeCount).append("스트라이크").toString();
+            return stringBuilder.append(strikeCount).append("스트라이크");
         }
         if (strikeCount != keyCount && strikeCount != 0) {
-            return stringBuilder.append(counts.getBallCount()).append("볼 ").append(strikeCount).append("스트라이크")
-                    .toString();
+            return stringBuilder.append(counts.getBallCount()).append("볼 ").append(strikeCount).append("스트라이크");
         }
         if (keyCount != 0 && strikeCount == 0) {
-            return stringBuilder.append(counts.getBallCount()).append("볼").toString();
+            return stringBuilder.append(counts.getBallCount()).append("볼");
         }
-        return stringBuilder.append("낫싱").toString();
+        return stringBuilder.append("낫싱");
     }
 
-    public String calculateRestartOrEnd() {
+    private String calculateRestartOrEnd() {
         String value = IoUtils.getUserInput("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
         ValidationUtils.validateRestartOrEndInput(value);
         if (value.equals("1")) {
