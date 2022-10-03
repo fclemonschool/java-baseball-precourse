@@ -17,7 +17,7 @@ public class Game {
         this.user = user;
     }
 
-    public Counts calculateCounts(String target) {
+    public void calculateCounts(String target) {
         Map<Character, Integer> inputMap = new HashMap<>();
         Map<Character, Integer> randomNumberMap = new HashMap<>();
 
@@ -29,7 +29,6 @@ public class Game {
             calculateKeyCount(randomNumberMap, key);
             calculateStrikeCount(randomNumberMap, key, value);
         });
-        return counts;
     }
 
     public void calculateKeyCount(Map<Character, Integer> randomNumberMap, Character key) {
@@ -44,8 +43,23 @@ public class Game {
         }
     }
 
-    public String makeCalculateLog(int keyCount, int strikeCount) {
-        StringBuilder stringBuilder = new StringBuilder();
+    public String calculateResult() {
+        int keyCount = counts.getKeyCount();
+        int strikeCount = counts.getStrikeCount();
+
+        logCalculateResult();
+        if (keyCount == strikeCount && strikeCount == 3) {
+            log.info("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+            return calculateRestartOrEnd();
+        }
+        return null;
+    }
+
+    public void logCalculateResult() {
+        log.info(makeCalculateLog(new StringBuilder(), counts.getKeyCount(), counts.getStrikeCount()));
+    }
+
+    public String makeCalculateLog(StringBuilder stringBuilder, int keyCount, int strikeCount) {
         if (keyCount > 0 && keyCount == strikeCount) {
             return stringBuilder.append(strikeCount).append("스트라이크").toString();
         }
